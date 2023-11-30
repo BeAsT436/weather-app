@@ -10,6 +10,7 @@ const city = document.querySelector(".city");
 const weatherContainer = document.querySelector(".weather-container");
 const img = document.querySelector(".weather-img");
 const condition = document.querySelector(".condition");
+const historyList = document.querySelector("#history")
 
 // fetch weather data
 async function getWeatherData(city) {
@@ -81,14 +82,25 @@ function displayHistory() {
     historyElement.textContent = location;
 
     const delButton = document.createElement("button");
-    delButton.innerHTML = `<i class="fa-solid fa-trash"></i>`;
+    // delButton.innerHTML = `<i class="fa-solid fa-trash"></i>`;
+    delButton.innerHTML = "delete"
+
     delButton.addEventListener("click", (event) => {
+      event.stopPropagation()
       const locationName = event.target.previousSibling.textContent;
       deleteLocationFromLocalStorage(locationName);
       displayHistory();
     });
 
-    document.querySelector("#history").appendChild(historyElement);
+    historyElement.addEventListener("click", (event)=>{
+      if (event.target !== delButton) {
+        searchBar.value = location
+        searchBtn.click()
+        searchBar.value = ""
+      }
+    })
+     historyElement.appendChild(delButton)
+     historyList.appendChild(historyElement);
   }
 }
 
