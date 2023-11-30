@@ -1,12 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="manifest" href="./manifest.json" />
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+          .register("./service-worker.js")
+          .then((registration) => {
+            console.log(
+              "Service Worker registered with scope:",
+              registration.scope
+            );
+          })
+          .catch((error) => {
+            console.error("Service Worker registration failed:", error);
+          });
+      }
+    </script>
     <title>Weather app</title>
-</head>
-<body>
-<script src="./index.js"></script>
-</body>
+  </head>
+  <body>
+    <audio id="audio" autoplay loop>
+      <source type="audio/mpeg" src="background-music.mp3" />
+      Your browser does not support the audio element.
+    </audio>
+
+    <div class="container">
+      <span id="mute-button">
+        <i class="fa-solid fa-volume-high"></i>
+      </span>
+
+      <div class="weather-container" style="display: none">
+        <h1 class="city"></h1>
+        <h2 class="temperature"></h2>
+        <p class="humidity"></p>
+        <p class="wind"></p>
+        <img src="" alt="weather-img" class="weather-img" />
+        <p class="condition"></p>
+      </div>
+
+      <input type="text" placeholder="enter a location" class="search-bar" />
+      <button class="search-btn">search</button>
+      <ul id="history">
+        
+      </ul>
+    </div>
+    
+
+    <script src="./index.js"></script>
+    <script src="./background-music.js"></script>
+  </body>
 </html>
